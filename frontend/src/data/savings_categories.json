@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "category": "Emergency Fund",
+    "description": "Funds set aside for unexpected expenses like medical bills, car repairs, or job loss."
+  },
+  {
+    "id": 2,
+    "category": "Retirement",
+    "description": "Savings for retirement accounts like 401(k), IRA, or pension funds."
+  },
+  {
+    "id": 3,
+    "category": "Vacation",
+    "description": "Money saved for travel and vacations."
+  },
+  {
+    "id": 4,
+    "category": "Home Purchase",
+    "description": "Savings for buying a home, down payment, or home improvements."
+  },
+  {
+    "id": 5,
+    "category": "Education",
+    "description": "Funds for education-related expenses like tuition, courses, or certifications."
+  },
+  {
+    "id": 6,
+    "category": "Car Purchase",
+    "description": "Money saved for buying a new or used car."
+  },
+  {
+    "id": 7,
+    "category": "Health & Wellness",
+    "description": "Savings for medical treatments, health insurance, or wellness programs."
+  },
+  {
+    "id": 8,
+    "category": "Gifts & Celebrations",
+    "description": "Money saved for birthdays, holidays, weddings, or other special occasions."
+  },
+  {
+    "id": 9,
+    "category": "Debt Repayment",
+    "description": "Extra funds set aside to pay off loans, credit cards, or other debts faster."
+  },
+  {
+    "id": 10,
+    "category": "Investments",
+    "description": "Savings intended for investment in stocks, mutual funds, or other assets."
+  }
+]

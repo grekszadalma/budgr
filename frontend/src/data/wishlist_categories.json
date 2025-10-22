@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "category": "Travel",
+    "description": "Dream trips and vacations."
+  },
+  {
+    "id": 2,
+    "category": "Gadgets",
+    "description": "Phones, laptops, or electronics."
+  },
+  {
+    "id": 3,
+    "category": "Furniture/Home Decor",
+    "description": "Upgrades or decorations for home."
+  },
+  {
+    "id": 4,
+    "category": "Fashion & Accessories",
+    "description": "Clothes, shoes, jewelry, and bags."
+  },
+  {
+    "id": 5,
+    "category": "Courses & Learning",
+    "description": "Workshops, online courses, certifications."
+  },
+  {
+    "id": 6,
+    "category": "Fitness & Sports",
+    "description": "Gym memberships, sports equipment."
+  }
+]
