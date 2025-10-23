@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Python virtual environments
+venv/
+webscraper/venv/
+
+# Python bytecode
+webscraper/__pycache__/

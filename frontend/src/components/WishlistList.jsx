@@ -2,6 +2,9 @@ import AddModal from "./AddModal.jsx";
 import wishlistData from "../data/wishlist_categories.json";
 import {Box, Grid, Paper} from "@mui/material";
 import {useQuery} from "@tanstack/react-query";
+import { useDispatch } from 'react-redux';
+import { setSelectedItem, clearSelectedItem } from "../features/selectedItemSlice";
+import { useNavigate } from 'react-router-dom';
 
 
 async function fetchWishlist() {
@@ -17,6 +20,10 @@ async function fetchWishlist() {
 
 export default function WishlistList() {
 
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+
     const { data: wlitems = [], isLoading, error } = // v5
         useQuery({
             queryKey: ['wlitems'],
@@ -24,6 +31,12 @@ export default function WishlistList() {
             retry: 2,
             staleTime: 1000 * 60,
         });
+
+    const handleClick = (item) => {
+        dispatch(clearSelectedItem());
+        dispatch(setSelectedItem(item));
+        navigate('/wishlist/item');
+    };
 
 
     if (isLoading) return <div>Loading wishlist items...</div>;
@@ -45,8 +58,9 @@ export default function WishlistList() {
                             borderRadius: 2,
                             textAlign: "center",
                         }}
+                        onClick={() => handleClick(item)}
                     >
-                        {item.description}
+                        {item.name}
                     </Paper>
                 </Grid>
             ))}

@@ -5,19 +5,19 @@ export default function AddModal({ open, onClose, onSubmit, type, categories, de
 
     const [company, setCompany] = useState("");
     const [description, setDescription] = useState("");
+    const [name, setName] = useState("");
     const [amount, setAmount] = useState(0);
     const [category, setCategory] = useState("");
 
-    console.log(description)
-    console.log(amount)
-    console.log(category)
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
         let payload = {}
         if(type === "Wishlist") {
             payload = {
-                ...(description && { description }),
+                ...(name && { name }),
+                ...(category && { category }),
             };
         } else {
             payload = {
@@ -31,6 +31,7 @@ export default function AddModal({ open, onClose, onSubmit, type, categories, de
         onSubmit(payload);
         setCompany("")// send data to parent
         setDescription("");
+        setName("");
         setAmount(0);
         setCategory("");
     }
@@ -50,12 +51,21 @@ export default function AddModal({ open, onClose, onSubmit, type, categories, de
                         />
                     )}
 
+                    {(type === "Wishlist") && (<TextField
+                        label="Name"
+                        fullWidth
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                    />
+                    )}
+
+                    {(type === "Expense" || type === "Income" || type === "Saving") && (
                     <TextField
                         label="Description"
                         fullWidth
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
-                    />
+                    />)}
 
                     {(type === "Expense" || type === "Income" || type === "Saving") && (
                         <TextField
@@ -67,7 +77,7 @@ export default function AddModal({ open, onClose, onSubmit, type, categories, de
                         />
                     )}
 
-                    {(type === "Expense" || type === "Income" || type === "Saving") && (
+                    {(type === "Expense" || type === "Income" || type === "Saving" || type == "Wishlist") && (
                         <TextField
                             select
                             label="Category"

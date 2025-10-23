@@ -28,5 +28,10 @@
     "id": 6,
     "category": "Fitness & Sports",
     "description": "Gym memberships, sports equipment."
+  },
+  {
+    "id": 7,
+    "category": "Beauty",
+    "description": "Makeup, skincare"
   }
 ]
