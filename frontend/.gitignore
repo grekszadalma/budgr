@@ -29,3 +29,14 @@ webscraper/venv/
 
 # Python bytecode
 webscraper/__pycache__/
+
+*.pyc
+*.pyo
+
+.env
+.env.local
+.env.*.local
+
+backend-java/target/
+backend-java/.mvn/
+
