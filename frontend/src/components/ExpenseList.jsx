@@ -30,7 +30,7 @@ export default function ExpenseList() {
     return (
         <>
             {expenses.map((expense) => (
-                <Card key={expense.id} sx={{ mb: 1, p: 1 }}>
+                <Card key={expense.id} sx={{ mb: 1, p: 1, m:2 }}>
                     <Box display="flex" alignItems="center">
                         <Box mr={3} display="flex" alignItems="center">
                             <SavingsIcon />

@@ -1,6 +1,8 @@
-import { Box, Card } from "@mui/material";
+import {Box, Button, Card, Grid, IconButton, Paper, styled, Typography} from "@mui/material";
 import SavingsIcon from "@mui/icons-material/Savings";
 import { useQuery } from "@tanstack/react-query";
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import LinearProgress, {linearProgressClasses} from "@mui/material/LinearProgress";
 
 async function fetchSavings() {
     const res = await fetch('http://localhost:8080/api/savings/me', {
@@ -8,13 +10,25 @@ async function fetchSavings() {
         credentials: "include"
     });
     if (!res.ok) throw new Error('Failed to fetch expenses');
-    const data = await res.json();   // parse JSON once
-    console.log(data);               // now this logs the actual array
+    const data = await res.json();
+    console.log(data);
     return data;
 }
 
+const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
+    height: 10,
+    borderRadius: 5,
+    [`&.${linearProgressClasses.colorPrimary}`]: {
+        backgroundColor: theme.palette.grey[200],
+    },
+    [`& .${linearProgressClasses.bar}`]: {
+        borderRadius: 5,
+        backgroundColor: "#1a90ff",
+    },
+}));
 
-export default function SavingList() {
+
+export default function SavingList({onPutMoney}) {
     const { data: savings = [], isLoading, error } = // v5
         useQuery({
             queryKey: ['savings'],
@@ -28,23 +42,66 @@ export default function SavingList() {
     if (error) return <div>Error: {error.message}</div>;
 
     return (
-        <>
-            {savings.map((saving) => (
-                <Card key={saving.id} sx={{ mb: 1, p: 1 }}>
-                    <Box display="flex" alignItems="center">
-                        <Box mr={3} display="flex" alignItems="center">
-                            <SavingsIcon />
-                        </Box>
-                        <Box display="flex" flexDirection="column">
-                            <p style={{ margin: 0 }}>{saving.description}</p>
-                            <p style={{ margin: 0 }}>
-                                {saving.date ? new Date(saving.date).toLocaleDateString() : ""}
-                            </p>
-                        </Box>
-                        <Box ml="auto">{saving.amount} €</Box>
-                    </Box>
-                </Card>
-            ))}
-        </>
+        <Box sx={{ p: 2 }}>
+            <Grid container spacing={2}>
+                {savings.map((saving) => {
+                    const spentPercent = saving.amount > 0
+                        ? Math.min((saving.amount / saving.goalAmount) * 100, 100)
+                        : 0;
+                    return (
+                        <Grid item xs={12} sm={6} md={3} key={saving.id}>
+                            <Paper
+                                elevation={3}
+                                sx={{
+                                    p: 2,
+                                    borderRadius: 3,
+                                    textAlign: "center",
+                                    height: 180,
+                                    width:210,
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    justifyContent: "space-between",
+                                }}
+                            >
+                                <Typography variant="h6" fontWeight="bold">
+                                    {saving.category}
+                                </Typography>
+
+                                <Box>
+                                    <Typography variant="h5" fontWeight="bold">
+                                        €{saving.amount.toFixed(2)}
+                                    </Typography>
+
+                                </Box>
+                                <Box>
+                                    <Typography variant="body2" color="text.secondary">
+                                        Saved: €{saving.amount.toFixed(2)} / €{saving.goalAmount.toFixed(2)}
+                                    </Typography>
+                                    <BorderLinearProgress variant="determinate" value={spentPercent} sx={{ mt: 1 }} />
+
+                                </Box>
+                                <Box>
+                                    <IconButton
+                                        disableRipple
+                                        sx={{
+                                            color: "inherit",
+                                            padding: 0,
+                                            '&:hover': { backgroundColor: 'transparent' },
+                                            '&:focus': { outline: 'none' },
+                                            '&:focus-visible': { outline: 'none' },
+                                        }}
+                                        onClick={() => onPutMoney(saving)}
+                                    >
+                                        <AddCircleOutlineIcon/>
+                                    </IconButton>
+
+                                </Box>
+                            </Paper>
+                        </Grid>
+                    );
+                })}
+            </Grid>
+        </Box>
     );
+
 }

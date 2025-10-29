@@ -6,10 +6,10 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
-      - "5173:5173"           # expose Vite dev server
+      - "5173:5173"
     volumes:
-      - ./frontend:/app       # mount local code into container
-      - /app/node_modules     # prevent overwriting node_modules
+      - ./frontend:/app
+      - /app/node_modules
     environment:
       - CHOKIDAR_USEPOLLING=true
     command: ["npm", "run", "dev", "--", "--host"]
@@ -26,6 +26,13 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/mydb
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: postgres
+
+  python-service:
+    build:
+      context: ./price_checker
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
 
   db:
     image: postgres:15-alpine

@@ -28,7 +28,7 @@ public class Income {
     @JsonBackReference //user is not included in the expense JSON!!! stops infinite loops...
     private User user;
 
-    private Long amount;
+    private Double amount;
 
     private String description;
 

@@ -47,4 +47,10 @@ public class IncomeController {
         income.setUser(currentUserService.get());
         return incomeService.createIncome(income);
     }
+
+    @GetMapping("/monthly/me")
+    public  List<Income> getMonthlyIncomesByUser() {
+        User user = currentUserService.get();
+        return incomeService.getIncomesForCurrentMonthByUser(user);
+    }
 }

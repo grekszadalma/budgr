@@ -43,14 +43,14 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public Long getUserBalance(Long userId) {
+    /*public Long getUserBalance(Long userId) {
         Optional<User> user = userRepository.findById(userId);
         Long totalExpenses = expenseRepository.sumExpensesByUserId(userId);
         Long totalIncomes = incomeRepository.sumIncomesByUserId(userId);
         Long remaining = totalIncomes - totalExpenses;
 
         return remaining;
-    }
+    }*/
 
     public User findById(Long id) {
         return userRepository.findById(id)

@@ -1,5 +1,7 @@
 package com.budgr.demo.controllers;
 
+import com.budgr.demo.dto.ExpenseRequest;
+import com.budgr.demo.models.Budget;
 import com.budgr.demo.models.Expense;
 import com.budgr.demo.models.User;
 import com.budgr.demo.services.CurrentUserService;
@@ -28,14 +30,24 @@ public class ExpenseController {
     }
 
     @PostMapping("/me")
-    public Expense createExpense(@RequestBody Expense expense) {
-        expense.setUser(currentUserService.get());
-        return expenseService.createExpense(expense);
+    public Expense createExpense(@RequestBody ExpenseRequest request) {
+
+        return expenseService.createExpense(request.getCompany(),request.getAmount(), request.getDescription(), request.getCategory());
     }
 
     // Optional: only for admins or testing, returns all expenses
     @GetMapping
     public List<Expense> findAll() {
         return expenseService.getAllExpenses();
+    }
+
+    @GetMapping("/monthly/me")
+    public List<Expense> getCurrentUserMonthlyExpenses() {
+        return expenseService.getExpensesForCurrentMonth();
+    }
+
+    @GetMapping("/monthly/me/by-budget/{budgetName}")
+    public List<Expense> getCurrentUserExpensesByBudget(@PathVariable String budgetName) {
+        return expenseService.getExpensesForBudgetThisMonth(budgetName);
     }
 }

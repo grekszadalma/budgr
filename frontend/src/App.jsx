@@ -13,7 +13,16 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Provider } from 'react-redux';
 import { store } from "./store/store";
+import Budget from "./pages/./Budget.jsx";
+import {createTheme, ThemeProvider} from "@mui/material";
 
+const theme = createTheme({
+    palette: {
+        background: {
+            default: "pink",
+        },
+    },
+});
 
 const queryClient = new QueryClient();
 
@@ -22,6 +31,7 @@ function App() {
     const isAuthenticated = false;
 
   return (
+      <ThemeProvider theme={theme}>
       <Provider store={store}>
       <QueryClientProvider client={queryClient}>
       <Routes>
@@ -30,6 +40,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/expenses" element={<Expenses />} />
           <Route path="/incomes" element={<Incomes />} />
+          <Route path="/budget" element={<Budget />} />
           <Route path="/savings" element={<Savings />} />
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/wishlist/item" element={<WishListItem />} />
@@ -42,6 +53,7 @@ function App() {
       </Routes>
       </QueryClientProvider>
       </Provider>
+      </ThemeProvider>
   )
 }
 

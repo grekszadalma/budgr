@@ -1,40 +1,23 @@
 import { useState } from "react";
 import SideBar from "../components/SideBar.jsx";
-import ExpenseList from "../components/ExpenseList.jsx";
+import BudgetList from "../components/BudgetList.jsx";
 import {Box, Button, Divider, Typography} from "@mui/material";
 import AddModal from "../components/AddModal.jsx";
+import savingsData from "../data/savings_categories.json";
+import WishlistList from "../components/WishlistList.jsx";
 import budgetData from "../data/budget_categories.json";
-import {useQuery} from "@tanstack/react-query";
 
-async function fetchBudgets() {
-    const res = await fetch('http://localhost:8080/api/budgets/me', {
-        method: "GET",
-        credentials: "include"
-    });
-    if (!res.ok) throw new Error('Failed to fetch budgets');
-    const data = await res.json();   // parse JSON once
-    console.log(data);               // now this logs the actual array
-    return data;
-}
-
-export default function Expenses() {
+export default function Budget() {
     const [open, setOpen] = useState(false);
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    const { data: budgets = [], isLoading, error } = // v5
-        useQuery({
-            queryKey: ['budgets'],
-            queryFn: fetchBudgets,
-            retry: 2,
-            staleTime: 1000 * 60,
-        });
     const handleSubmit = async (formData) => {
         console.log("Form submitted!", formData);
 
         try {
-            const response = await fetch("http://localhost:8080/api/expenses/me", {
+            const response = await fetch("http://localhost:8080/api/budgets/me", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -61,8 +44,10 @@ export default function Expenses() {
     const SIDEBAR_WIDTH = 230;
     return (
         <Box sx={{ display: "flex", height: "100vh" }}>
+            {/* Sidebar */}
             <SideBar />
 
+            {/* Main content — uses calc to subtract sidebar width */}
             <Box
                 sx={{
                     width: `calc(100vw - ${SIDEBAR_WIDTH}px)`,
@@ -71,36 +56,33 @@ export default function Expenses() {
                     overflow: "hidden",
                 }}
             >
-                {/* Header Section */}
+                {/* Header */}
                 <Box
                     sx={{
                         display: "flex",
                         justifyContent: "space-between",
                         alignItems: "center",
-                        mb: 2
+                        p: 2,
                     }}
                 >
-                    <Typography variant="h4">Expenses</Typography>
-                    <Button sx={{width: 150}} variant="contained" onClick={handleOpen}>
-                        Add Expense
+                    <Typography variant="h4">Budget</Typography>
+                    <Button variant="contained" onClick={handleOpen}>
+                        Add Budget
                     </Button>
                 </Box>
 
                 <Divider />
 
-                {/* List Section */}
-                <Box sx={{ mt: 2, flexGrow: 1, overflowY: "auto" }}>
-                    <ExpenseList />
-                </Box>
+                <BudgetList />
 
                 {/* Modal */}
                 <AddModal
                     open={open}
                     onClose={handleClose}
                     onSubmit={handleSubmit}
-                    type="Expense"
-                    categories={budgets}
-                    defaultTitle="Add New Expense"
+                    type="Budget"
+                    categories={budgetData}
+                    defaultTitle="Add New Budget"
                 />
             </Box>
         </Box>

@@ -44,7 +44,7 @@ public class UserController {
         return userService.findAll();
     }
 
-    @GetMapping("/{id}/balance")
+    /*@GetMapping("/{id}/balance")
     public BalanceDTO getUserBalance(@PathVariable Long id) {
         User user = userService.findById(id); // <-- make sure this returns User, not Long
         Long remaining = userService.getUserBalance(user.getId());
@@ -53,7 +53,7 @@ public class UserController {
                 user.getId(),
                 remaining
         );
-    }
+    }*/
 
 
 

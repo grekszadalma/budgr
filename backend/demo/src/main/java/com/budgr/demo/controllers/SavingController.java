@@ -1,20 +1,20 @@
 package com.budgr.demo.controllers;
 
-import com.budgr.demo.models.Income;
+import com.budgr.demo.dto.DepositRequest;
 import com.budgr.demo.models.Saving;
 import com.budgr.demo.models.User;
 import com.budgr.demo.services.CurrentUserService;
-import com.budgr.demo.services.IncomeService;
 import com.budgr.demo.services.SavingService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/savings")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
 public class SavingController {
 
     private SavingService savingService;
@@ -44,9 +44,23 @@ public class SavingController {
         return savingService.getSavingsByUser(user);
     }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<?> updateSaving(@PathVariable Long id, @RequestBody DepositRequest request) {
+        try {
+            Saving updatedSaving = savingService.updateSaving(id, request.getAmount());
+            return ResponseEntity.ok(updatedSaving);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.notFound().build();
+        }
+
+    }
+
     @PostMapping("/me")
     public Saving createExpense(@RequestBody Saving saving) {
         saving.setUser(currentUserService.get());
         return savingService.createSaving(saving);
     }
+
+
+
 }

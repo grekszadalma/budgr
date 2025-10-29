@@ -7,6 +7,8 @@ import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import SavingsOutlinedIcon from '@mui/icons-material/SavingsOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import WalletOutlinedIcon from '@mui/icons-material/WalletOutlined';
+import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
 import { Box, Typography, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 
 export default function SideBar() {
@@ -25,6 +27,7 @@ export default function SideBar() {
                     flexDirection: 'column',
                     alignItems: 'flex-start',
                     p: 2,
+
                 },
             }}
             variant="permanent"
@@ -55,6 +58,12 @@ export default function SideBar() {
                         <RemoveCircleOutlineIcon />
                     </ListItemIcon>
                     <ListItemText primary="Expenses" />
+                </ListItem>
+                <ListItem button sx={{width: 230}} onClick={() => navigate("/budget")}>
+                    <ListItemIcon>
+                        <AccountBalanceWalletOutlinedIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Budget" />
                 </ListItem>
                 <ListItem button sx={{width: 230}} onClick={() => navigate("/savings")}>
                     <ListItemIcon>

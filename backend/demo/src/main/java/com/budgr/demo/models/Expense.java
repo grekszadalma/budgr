@@ -25,19 +25,23 @@ public class Expense {
 
     @ManyToOne()
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonBackReference //user is not included in the expense JSON!!! stops infinite loops...
+    @JsonBackReference("user-expenses") //user is not included in the expense JSON!!! stops infinite loops...
     private User user;
 
     private String company;
     private String location;
 
-    private Long amount;
+    private Double amount;
 
     private String description;
 
     private LocalDateTime date;
 
     private Boolean isRecurring;
-    private String category;
+
+    @ManyToOne()
+    @JoinColumn(name = "budget_id")
+    @JsonBackReference("budget-expenses")
+    private Budget budget;
 
 }

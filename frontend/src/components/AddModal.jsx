@@ -6,6 +6,7 @@ export default function AddModal({ open, onClose, onSubmit, type, categories, de
     const [company, setCompany] = useState("");
     const [description, setDescription] = useState("");
     const [name, setName] = useState("");
+    const [goalAmount, setGoalAmount] = useState(0);
     const [amount, setAmount] = useState(0);
     const [category, setCategory] = useState("");
 
@@ -19,14 +20,27 @@ export default function AddModal({ open, onClose, onSubmit, type, categories, de
                 ...(name && { name }),
                 ...(category && { category }),
             };
-        } else {
+        } else if (type === "Expense" || type === "Income" ){
             payload = {
-                ...(type === "Expense" && company && { company }),
+                ...(company && { company }),
                 ...(amount && { amount: Number(amount) }),
                 ...(description && { description }),
                 ...(category && { category }),
 
             };
+        } else if (type === "Saving") {
+            payload = {
+                ...(amount && { amount: Number(amount) }),
+                ...(goalAmount && {goalAmount: Number(goalAmount)}),
+                ...(description && { description }),
+                ...(category && { category }),
+            }
+        }
+        else {
+            payload = {
+                ...(amount && { amount: Number(amount) }),
+                ...(name && { name }),
+            }
         }
         onSubmit(payload);
         setCompany("")// send data to parent
@@ -42,6 +56,31 @@ export default function AddModal({ open, onClose, onSubmit, type, categories, de
             <DialogContent>
                 <Box component="form" sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
 
+                    {(type === "Expense" || type === "Income" || type === "Saving" || type == "Wishlist") && (
+                        <TextField
+                            select
+                            label="Category"
+                            value={category || ""}
+                            onChange={(e) => setCategory(e.target.value)}
+                            fullWidth
+                        >
+                            {type === "Expense" ? (
+                                categories.map(cat => (
+                                    <MenuItem key={cat.id} value={cat.name}>
+                                        {cat.name}
+                                    </MenuItem>
+                                ))
+                            ) : (
+                                categories.map(cat => (
+                                    <MenuItem key={cat.id} value={cat.category}>
+                                        {cat.category}
+                                    </MenuItem>
+                                ))
+                            )}
+
+                        </TextField>
+                    )}
+
                     {(type === "Expense" || type === "Income") && (
                         <TextField
                             label="Company"
@@ -51,7 +90,7 @@ export default function AddModal({ open, onClose, onSubmit, type, categories, de
                         />
                     )}
 
-                    {(type === "Wishlist") && (<TextField
+                    {(type === "Wishlist" || type === "Budget") && (<TextField
                         label="Name"
                         fullWidth
                         value={name}
@@ -67,7 +106,17 @@ export default function AddModal({ open, onClose, onSubmit, type, categories, de
                         onChange={(e) => setDescription(e.target.value)}
                     />)}
 
-                    {(type === "Expense" || type === "Income" || type === "Saving") && (
+                    {(type === "Saving") && (
+                        <TextField
+                            label="Goal amount"
+                            type="number"
+                            fullWidth
+                            value={goalAmount}
+                            onChange={(e) => setGoalAmount(e.target.value)}
+                        />
+                    )}
+
+                    {(type === "Expense" || type === "Income" || type === "Saving" || type == "Budget") && (
                         <TextField
                             label="Amount"
                             type="number"
@@ -77,21 +126,7 @@ export default function AddModal({ open, onClose, onSubmit, type, categories, de
                         />
                     )}
 
-                    {(type === "Expense" || type === "Income" || type === "Saving" || type == "Wishlist") && (
-                        <TextField
-                            select
-                            label="Category"
-                            value={category || ""}
-                            onChange={(e) => setCategory(e.target.value)}
-                            fullWidth
-                        >
-                            {categories.map(cat => (
-                                <MenuItem key={cat.id} value={cat.category}>
-                                    {cat.category}
-                                </MenuItem>
-                            ))}
-                        </TextField>
-                    )}
+
 
                 </Box>
             </DialogContent>
