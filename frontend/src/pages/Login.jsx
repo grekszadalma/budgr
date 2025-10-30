@@ -3,8 +3,11 @@ import {useState} from "react";
 import * as React from "react";
 import SavingsIcon from '@mui/icons-material/Savings';
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../AuthContext.jsx";
 
 export default function Login() {
+
+    const { login } = useAuth();
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState(
@@ -37,6 +40,7 @@ export default function Login() {
             }
 
             const data = await response.text();
+            login(data);
             console.log("User logged in:", data);
             alert("Login successful!");
             navigate("/dashboard")

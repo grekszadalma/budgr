@@ -16,6 +16,9 @@ import { store } from "./store/store";
 import Budget from "./pages/./Budget.jsx";
 import {createTheme, ThemeProvider} from "@mui/material";
 
+import { AuthProvider } from "./AuthContext.jsx";
+import ProtectedRoute from "./ProtectedRoute.jsx";
+
 const theme = createTheme({
     palette: {
         background: {
@@ -34,23 +37,55 @@ function App() {
       <ThemeProvider theme={theme}>
       <Provider store={store}>
       <QueryClientProvider client={queryClient}>
+          <AuthProvider>
       <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/expenses" element={<Expenses />} />
-          <Route path="/incomes" element={<Incomes />} />
-          <Route path="/budget" element={<Budget />} />
-          <Route path="/savings" element={<Savings />} />
-          <Route path="/wishlist" element={<Wishlist />} />
-          <Route path="/wishlist/item" element={<WishListItem />} />
+          <Route path="/expenses" element={
+              <ProtectedRoute>
+              <Expenses />
+              </ProtectedRoute>
+          } />
+          <Route path="/incomes" element={
+              <ProtectedRoute>
+              <Incomes />
+              </ProtectedRoute>
+          } />
+          <Route path="/budget" element={
+              <ProtectedRoute>
+              <Budget />
+              </ProtectedRoute>
+          } />
+          <Route path="/savings" element={
+              <ProtectedRoute>
+              <Savings />
+
+              </ProtectedRoute>
+          } />
+          <Route path="/wishlist" element={
+              <ProtectedRoute>
+              <Wishlist />
+                  </ProtectedRoute>
+              }
+          />
+          <Route path="/wishlist/item" element={
+              <ProtectedRoute>
+              <WishListItem />
+                  </ProtectedRoute>
+          } />
+
           <Route
               path="/dashboard"
               element={
+                  <ProtectedRoute>
                   <Dashboard />
+                  </ProtectedRoute>
               }
           />
+
       </Routes>
+          </AuthProvider>
       </QueryClientProvider>
       </Provider>
       </ThemeProvider>
