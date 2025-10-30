@@ -6,6 +6,7 @@ import com.budgr.demo.models.Income;
 import com.budgr.demo.models.User;
 import com.budgr.demo.repositories.BudgetRepository;
 import com.budgr.demo.repositories.ExpenseRepository;
+import com.budgr.demo.repositories.IncomeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,6 +49,7 @@ public class ExpenseService {
                     });
             expense.setBudget(budget);
         }
+
 
         return expenseRepository.save(expense);
     }

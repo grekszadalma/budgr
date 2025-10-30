@@ -3,17 +3,8 @@ import SavingsIcon from "@mui/icons-material/Savings";
 import { useQuery } from "@tanstack/react-query";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import LinearProgress, {linearProgressClasses} from "@mui/material/LinearProgress";
+import {fetchSavings} from "../api/get.js";
 
-async function fetchSavings() {
-    const res = await fetch('http://localhost:8080/api/savings/me', {
-        method: "GET",
-        credentials: "include"
-    });
-    if (!res.ok) throw new Error('Failed to fetch expenses');
-    const data = await res.json();
-    console.log(data);
-    return data;
-}
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
     height: 10,

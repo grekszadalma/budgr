@@ -44,6 +44,12 @@ public class SavingController {
         return savingService.getSavingsByUser(user);
     }
 
+    @GetMapping("monthly/me")
+    public List<Saving> getUserMonthlySavings() {
+        User user = currentUserService.get();
+        return savingService.getMonthlySavingsByUser(user);
+    }
+
     @PatchMapping("/{id}")
     public ResponseEntity<?> updateSaving(@PathVariable Long id, @RequestBody DepositRequest request) {
         try {

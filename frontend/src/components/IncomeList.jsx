@@ -1,17 +1,8 @@
 import { Box, Card } from "@mui/material";
 import SavingsIcon from "@mui/icons-material/Savings";
 import { useQuery } from "@tanstack/react-query";
+import {fetchIncomes} from "../api/get.js";
 
-async function fetchIncomes() {
-    const res = await fetch('http://localhost:8080/api/incomes/me', {
-        method: "GET",
-        credentials: "include"
-    });
-    if (!res.ok) throw new Error('Failed to fetch incomes');
-    const data = await res.json();   // parse JSON once
-    console.log(data);               // now this logs the actual array
-    return data;
-}
 
 
 export default function IncomeList() {

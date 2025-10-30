@@ -1,24 +1,15 @@
 import { Box, Card } from "@mui/material";
 import SavingsIcon from "@mui/icons-material/Savings";
 import { useQuery } from "@tanstack/react-query";
+import {fetchMonthlyExpenses} from "../api/get.js";
 
-async function fetchExpenses() {
-    const res = await fetch('http://localhost:8080/api/expenses/me', {
-        method: "GET",
-        credentials: "include"
-    });
-    if (!res.ok) throw new Error('Failed to fetch expenses');
-    const data = await res.json();   // parse JSON once
-    console.log(data);               // now this logs the actual array
-    return data;
-}
 
 
 export default function ExpenseList() {
     const { data: expenses = [], isLoading, error } = // v5
         useQuery({
             queryKey: ['expenses'],
-            queryFn: fetchExpenses,
+            queryFn: fetchMonthlyExpenses,
             retry: 2,
             staleTime: 1000 * 60,
         });

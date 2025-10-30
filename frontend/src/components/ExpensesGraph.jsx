@@ -6,22 +6,10 @@ import AddModal from "../components/AddModal.jsx";
 import expensesData from "../data/expenses_categories.json";
 import { LineChart } from '@mui/x-charts/LineChart';
 import {useQuery} from "@tanstack/react-query";
+import {fetchMonthlyExpenses} from "../api/get.js";
 
 
 
-async function fetchMonthlyExpenses() {
-    const res = await fetch('http://localhost:8080/api/expenses/monthly/me', {
-        method: "GET",
-        credentials: "include"
-    });
-    if (!res.ok) throw new Error('Failed to fetch expenses');
-    const data = await res.json();
-
-
-
-    console.log(data);
-    return data;
-}
 
 const margin = { right: 24 };
 
