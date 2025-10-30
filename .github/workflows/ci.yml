@@ -3,7 +3,7 @@ name: Build Docker Containers
 on:
   push:
     branches:
-      - develop/v1.0.0
+      - dev/v1.0.0
       - main
   pull_request:
     branches:
