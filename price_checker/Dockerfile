@@ -14,4 +14,4 @@ COPY . .
 EXPOSE 5000
 
 # Command to run your app (adjust to your app)
-CMD ["python", "app.py"]
+CMD ["python", "webscraper.py"]
