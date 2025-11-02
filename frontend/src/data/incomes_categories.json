@@ -56,7 +56,14 @@
   },
   {
     "id": 12,
+    "category": "Unemployment benefit",
+    "description": "Money coming from the state for unemployment"
+
+  },
+  {
+    "id": 13,
     "category": "Other",
     "description": "Any other income not covered above"
   }
+
 ]

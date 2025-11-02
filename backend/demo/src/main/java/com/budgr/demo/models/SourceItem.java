@@ -2,6 +2,7 @@ package com.budgr.demo.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,7 @@ public class SourceItem {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private UUID id;
 
 
     private String productUrl;

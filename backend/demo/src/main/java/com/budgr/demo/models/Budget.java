@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
@@ -19,7 +20,7 @@ public class Budget {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private UUID id;
 
     private String name;
 

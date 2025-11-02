@@ -7,6 +7,8 @@ import com.budgr.demo.services.ExpenseService;
 import com.budgr.demo.services.IncomeService;
 import com.budgr.demo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,7 +16,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/users")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
 public class UserController {
 
     private final UserService userService;
@@ -54,6 +56,13 @@ public class UserController {
                 remaining
         );
     }*/
+
+    @GetMapping("/me")
+    public User getCurrentUser(@AuthenticationPrincipal UserDetails principal) {
+        if (principal == null) return null;
+        return userService.findByEmail(principal.getUsername()).orElse(null);
+    }
+
 
 
 

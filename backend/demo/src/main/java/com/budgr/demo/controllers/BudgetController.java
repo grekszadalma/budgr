@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/budgets")
@@ -41,6 +42,11 @@ public class BudgetController {
     public List<BudgetWithSpent> getUserBudgetsWithSpent() {
         User user = currentUserService.get();
         return budgetService.getBudgetsWithSpentForUser(user);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteBudget(@PathVariable UUID id) {
+        budgetService.removeBudget(id);
     }
 
 }

@@ -41,13 +41,16 @@ public class AuthenticationController {
         final UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmail());
         String token = jwtUtil.generateToken(userDetails.getUsername());
 
-        // Set JWT in HttpOnly, Secure cookie
+
         Cookie cookie = new Cookie("jwt", token);
-        cookie.setHttpOnly(true);        // JS cannot read this cookie
-        cookie.setSecure(false);          // only send over HTTPS
-        cookie.setPath("/");             // available to all paths
-        cookie.setMaxAge(10 * 60 * 60);  // 10 hours
+        cookie.setHttpOnly(true);
+        cookie.setSecure(false);
+        cookie.setPath("/");
+        cookie.setMaxAge(10 * 60 * 60);
+        cookie.setDomain("localhost");
+        cookie.setAttribute("SameSite", "None");
         response.addCookie(cookie);
+
 
         return "Login successful";
     }

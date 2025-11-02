@@ -6,8 +6,8 @@
   },
   {
     "id": 2,
-    "category": "Retirement",
-    "description": "Savings for retirement accounts like 401(k), IRA, or pension funds."
+    "category": "Electronics",
+    "description": "Everything that is electronics (smartphone, pc, tv etc.)"
   },
   {
     "id": 3,
@@ -48,5 +48,10 @@
     "id": 10,
     "category": "Investments",
     "description": "Savings intended for investment in stocks, mutual funds, or other assets."
+  },
+  {
+    "id": 11,
+    "category": "Retirement",
+    "description": "Savings for retirement accounts like 401(k), IRA, or pension funds."
   }
 ]

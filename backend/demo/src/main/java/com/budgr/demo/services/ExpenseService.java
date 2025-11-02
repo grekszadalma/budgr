@@ -7,6 +7,7 @@ import com.budgr.demo.models.User;
 import com.budgr.demo.repositories.BudgetRepository;
 import com.budgr.demo.repositories.ExpenseRepository;
 import com.budgr.demo.repositories.IncomeRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ExpenseService {
@@ -95,6 +97,12 @@ public class ExpenseService {
         LocalDateTime end = endDate.atTime(23, 59, 59, 999_999_999);
 
         return expenseRepository.findMonthlyExpensesByUserAndBudget(user.getId(), budgetName, start, end);
+    }
+
+    @Transactional
+    public void removeExpense(UUID id) {
+        var user = currentUserService.get();
+        expenseRepository.deleteExpenseByUserIdAndId(user.getId(), id);
     }
 
 

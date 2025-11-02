@@ -9,11 +9,12 @@ import org.springframework.data.repository.query.Param;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
-public interface ExpenseRepository extends JpaRepository<Expense, Long> {
+public interface ExpenseRepository extends JpaRepository<Expense, UUID> {
 
     @Query("SELECT COALESCE(SUM(e.amount), 0) FROM Expense e WHERE e.user.id = :userId")
-    Long sumExpensesByUserId(@Param("userId") Long userId);
+    Long sumExpensesByUserId(@Param("userId") UUID userId);
 
     List<Expense> findByUserEmail(String email);
 
@@ -25,7 +26,7 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long> {
         WHERE e.user.id = :userId
           AND e.date BETWEEN :start AND :end
     """)
-    List<Expense> findMonthlyExpensesByUser(@Param("userId") Long userId,
+    List<Expense> findMonthlyExpensesByUser(@Param("userId") UUID userId,
                                             @Param("start") LocalDateTime start,
                                             @Param("end") LocalDateTime end);
 
@@ -36,9 +37,11 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long> {
           AND e.user.id = :userId
           AND e.date BETWEEN :start AND :end
     """)
-    List<Expense> findMonthlyExpensesByUserAndBudget(@Param("userId") Long userId,
+    List<Expense> findMonthlyExpensesByUserAndBudget(@Param("userId") UUID userId,
                                                      @Param("budgetName") String budgetName,
                                                      @Param("start") LocalDateTime start,
                                                      @Param("end") LocalDateTime end);
+
+    void deleteExpenseByUserIdAndId(UUID userId, UUID id);
 
 }

@@ -33,22 +33,26 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                                     FilterChain filterChain)
             throws ServletException, IOException {
 
-        final String token = getJwtFromCookies(request);
-
-        if (token != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            String username = jwtUtil.extractUsername(token);
-
-            if (username != null) {
-                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-
-                if (jwtUtil.validateToken(token, userDetails.getUsername())) {
-                    UsernamePasswordAuthenticationToken authToken =
-                            new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-
-                    authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                    SecurityContextHolder.getContext().setAuthentication(authToken);
+        try {
+            final String token = getJwtFromCookies(request);
+            if (token != null) {
+                try {
+                    String username = jwtUtil.extractUsername(token);
+                    if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+                        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+                        if (jwtUtil.validateToken(token, userDetails.getUsername())) {
+                            UsernamePasswordAuthenticationToken authToken =
+                                    new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                            authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                            SecurityContextHolder.getContext().setAuthentication(authToken);
+                        }
+                    }
+                } catch (Exception e) {
+                    System.out.println("JWT parse/validation failed: " + e.getMessage());
                 }
             }
+        } catch (Exception e) {
+            System.out.println("Error in JwtRequestFilter: " + e.getMessage());
         }
 
         filterChain.doFilter(request, response);

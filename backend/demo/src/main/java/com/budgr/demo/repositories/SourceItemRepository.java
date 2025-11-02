@@ -6,8 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
-public interface SourceItemRepository extends JpaRepository<SourceItem, Long> {
+public interface SourceItemRepository extends JpaRepository<SourceItem, UUID> {
 
     List<SourceItem> findAllByWishListItem(WishListItem item);
     //Optional<SourceItem> findByWishlistItemAndSite(WishListItem item, String site);

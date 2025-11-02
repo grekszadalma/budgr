@@ -11,10 +11,11 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/incomes")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
 public class IncomeController {
 
     private IncomeService incomeService;
@@ -31,15 +32,9 @@ public class IncomeController {
         return incomeService.getIncomes();
     }
 
-    /*@PostMapping
-    public Income createIncome(@RequestBody Income income) {
-        return incomeService.createIncome(income);
-    }*/
-
     @GetMapping("/me")
     public List<Income> getUserExpenses() {
-        User user = currentUserService.get();
-        return incomeService.getIncomesByUser(user);
+        return incomeService.getIncomesByUser();
     }
 
     @PostMapping("/me")
@@ -49,8 +44,13 @@ public class IncomeController {
     }
 
     @GetMapping("/monthly/me")
-    public  List<Income> getMonthlyIncomesByUser() {
+    public List<Income> getMonthlyIncomesByUser() {
         User user = currentUserService.get();
         return incomeService.getIncomesForCurrentMonthByUser(user);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteIncome(@PathVariable UUID id) {
+        incomeService.removeIncome(id);
     }
 }

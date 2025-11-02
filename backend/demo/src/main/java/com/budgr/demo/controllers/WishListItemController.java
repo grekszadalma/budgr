@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("api/wlitems")
@@ -43,6 +44,11 @@ public class WishListItemController {
         User user = currentUserService.get();
         wishListItem.setUser(user);
         return wishListItemService.createWishListItem(wishListItem);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteWishlistItem(@PathVariable UUID id) {
+        wishListItemService.removeWishlistItem(id);
     }
 
 }

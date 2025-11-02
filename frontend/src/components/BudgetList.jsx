@@ -1,11 +1,13 @@
 import AddModal from "./AddModal.jsx";
 import wishlistData from "../data/wishlist_categories.json";
-import {Box, Grid, Paper, styled, Typography} from "@mui/material";
-import {useQuery} from "@tanstack/react-query";
+import {Box, Grid, IconButton, Paper, styled, Typography} from "@mui/material";
+import {useQuery, useQueryClient, useMutation} from "@tanstack/react-query";
 import { useDispatch } from 'react-redux';
 import { setSelectedItem, clearSelectedItem } from "../features/selectedItemSlice";
 import { useNavigate } from 'react-router-dom';
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
+import CloseIcon from "@mui/icons-material/Close";
+import {deleteBudget} from "../api/delete.js";
 
 async function fetchBudgets() {
     const res = await fetch('http://localhost:8080/api/budgets/me/with-spent', {
@@ -32,6 +34,7 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 
 export default function BudgetList() {
 
+    const queryClient = useQueryClient();
 
     const { data: budgets = [], isLoading, error } = // v5
         useQuery({
@@ -41,7 +44,17 @@ export default function BudgetList() {
             staleTime: 1000 * 60,
         });
 
-
+    const deleteMutation = useMutation({
+        mutationFn: deleteBudget,
+        onSuccess: () => {
+            // refetch or update cache after deletion
+            queryClient.invalidateQueries(["budgets"]);
+        },
+        onError: (error) => {
+            console.error("Error deleting budget:", error);
+            alert("Failed to delete budget");
+        },
+    });
 
 
     if (isLoading) return <div>Loading budget...</div>;
@@ -68,15 +81,34 @@ export default function BudgetList() {
                                     display: "flex",
                                     flexDirection: "column",
                                     justifyContent: "space-between",
+                                    position: "relative",
+                                    "&:hover .delete-btn": { opacity: 1 },
                                 }}
                             >
+
+                                    <IconButton
+                                        className="delete-btn"
+                                        size="small"
+                                        sx={{
+                                            position: "absolute",
+                                            top: 8,
+                                            right: 8,
+                                            color: "red",
+                                            opacity: 0,
+                                            transition: "opacity 0.3s",
+                                        }}
+                                        onClick={() => deleteMutation.mutate(budget.id)}
+                                    >
+                                        <CloseIcon fontSize="small" />
+                                    </IconButton>
+
                                 <Typography variant="h6" fontWeight="bold">
                                     {budget.name}
                                 </Typography>
 
                                 <Box>
                                     <Typography variant="body2" color="text.secondary">
-                                        Spent: €{budget.spentAmount.toFixed(2)} / €{budget.amount.toFixed(2)}
+                                        Spent: €{budget.spentAmount} / €{budget.amount}
                                     </Typography>
                                     <BorderLinearProgress variant="determinate" value={spentPercent} sx={{ mt: 1 }} />
 

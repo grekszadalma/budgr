@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/savings")
@@ -51,7 +52,7 @@ public class SavingController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<?> updateSaving(@PathVariable Long id, @RequestBody DepositRequest request) {
+    public ResponseEntity<?> updateSaving(@PathVariable UUID id, @RequestBody DepositRequest request) {
         try {
             Saving updatedSaving = savingService.updateSaving(id, request.getAmount());
             return ResponseEntity.ok(updatedSaving);
@@ -65,6 +66,11 @@ public class SavingController {
     public Saving createExpense(@RequestBody Saving saving) {
         saving.setUser(currentUserService.get());
         return savingService.createSaving(saving);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteSaving(@PathVariable UUID id) {
+        savingService.removeSaving(id);
     }
 
 

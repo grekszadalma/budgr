@@ -16,7 +16,7 @@ export async function fetchMonthlyIncomes() {
         method: "GET",
         credentials: "include",
     });
-    if (!res.ok) throw new Error("Failed to fetch income sum");
+    if (!res.ok) throw new Error("Failed to fetch monthly incomes");
     return res.json();
 }
 

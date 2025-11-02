@@ -6,6 +6,7 @@ import com.budgr.demo.models.Expense;
 import com.budgr.demo.models.User;
 import com.budgr.demo.repositories.BudgetRepository;
 import com.budgr.demo.repositories.ExpenseRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,17 +14,21 @@ import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class BudgetService {
 
     private BudgetRepository budgetRepository;
     private ExpenseRepository expenseRepository;
+    private CurrentUserService currentUserService;
+
 
     @Autowired
-    public BudgetService(BudgetRepository budgetRepository, ExpenseRepository expenseRepository) {
+    public BudgetService(BudgetRepository budgetRepository, ExpenseRepository expenseRepository, CurrentUserService currentUserService) {
         this.budgetRepository = budgetRepository;
         this.expenseRepository = expenseRepository;
+        this.currentUserService = currentUserService;
     }
 
     public List<Budget> getBudgetsByUser(User user) {
@@ -67,6 +72,11 @@ public class BudgetService {
         }).toList();
     }
 
+    @Transactional
+    public void removeBudget(UUID id) {
+        User user = currentUserService.get();
+        budgetRepository.deleteBudgetByUserIdAndId(user.getId(),id);
+    }
 
 
 }

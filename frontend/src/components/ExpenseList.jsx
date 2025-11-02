@@ -1,11 +1,15 @@
-import { Box, Card } from "@mui/material";
+import {Box, Card, IconButton} from "@mui/material";
 import SavingsIcon from "@mui/icons-material/Savings";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation,useQueryClient } from "@tanstack/react-query";
 import {fetchMonthlyExpenses} from "../api/get.js";
+import {deleteExpense} from "../api/delete.js";
+import CloseIcon from "@mui/icons-material/Close";
 
 
 
 export default function ExpenseList() {
+    const queryClient = useQueryClient();
+
     const { data: expenses = [], isLoading, error } = // v5
         useQuery({
             queryKey: ['expenses'],
@@ -14,6 +18,18 @@ export default function ExpenseList() {
             staleTime: 1000 * 60,
         });
 
+    const deleteMutation = useMutation({
+        mutationFn: deleteExpense,
+        onSuccess: () => {
+            // refetch or update cache after deletion
+            queryClient.invalidateQueries(["expenses"]);
+        },
+        onError: (error) => {
+            console.error("Error deleting expense:", error);
+            alert("Failed to delete expense");
+        },
+    });
+
 
     if (isLoading) return <div>Loading expenses...</div>;
     if (error) return <div>Error: {error.message}</div>;
@@ -21,7 +37,7 @@ export default function ExpenseList() {
     return (
         <>
             {expenses.map((expense) => (
-                <Card key={expense.id} sx={{ mb: 1, p: 1, m:2 }}>
+                <Card key={expense.id} sx={{ mb: 1, p: 1, m:2, "&:hover .delete-btn": { opacity: 1 }, }}>
                     <Box display="flex" alignItems="center">
                         <Box mr={3} display="flex" alignItems="center">
                             <SavingsIcon />
@@ -33,6 +49,19 @@ export default function ExpenseList() {
                             </p>
                         </Box>
                         <Box ml="auto">{expense.amount} €</Box>
+                        <IconButton
+                            className="delete-btn"
+                            size="small"
+                            sx={{
+                                color: "red",
+                                opacity: 0,
+                                transition: "opacity 0.3s",
+                                ml: 1,
+                            }}
+                            onClick={() => deleteMutation.mutate(expense.id)}
+                        >
+                            <CloseIcon />
+                        </IconButton>
                     </Box>
                 </Card>
             ))}

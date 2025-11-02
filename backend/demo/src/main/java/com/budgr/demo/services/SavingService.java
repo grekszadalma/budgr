@@ -3,6 +3,7 @@ package com.budgr.demo.services;
 import com.budgr.demo.models.Saving;
 import com.budgr.demo.models.User;
 import com.budgr.demo.repositories.SavingRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -12,15 +13,20 @@ import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class SavingService {
 
     private SavingRepository savingRepository;
+    private CurrentUserService currentUserService;
+
 
     @Autowired
-    public SavingService(SavingRepository savingRepository) {
+    public SavingService(SavingRepository savingRepository,  CurrentUserService currentUserService) {
+
         this.savingRepository = savingRepository;
+        this.currentUserService = currentUserService;
     }
 
     public Saving createSaving(Saving saving) {
@@ -36,7 +42,7 @@ public class SavingService {
         return savingRepository.findAllByUser(user);
     }
 
-    public Saving updateSaving(Long id, Double incomingAmount) throws RuntimeException {
+    public Saving updateSaving(UUID id, Double incomingAmount) throws RuntimeException {
 
         Optional<Saving> existing = savingRepository.findById(id);
         if(existing.isEmpty()) {
@@ -58,5 +64,11 @@ public class SavingService {
         LocalDateTime end = endDate.atTime(23, 59, 59, 999_999_999);
 
         return savingRepository.findMonthlySavingsByUser(user.getId(), start, end);
+    }
+
+    @Transactional
+    public void removeSaving(UUID id) {
+        User user = currentUserService.get();
+        savingRepository.deleteSavingByUserIdAndId(user.getId(),id);
     }
 }

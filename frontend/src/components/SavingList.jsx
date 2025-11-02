@@ -1,9 +1,11 @@
 import {Box, Button, Card, Grid, IconButton, Paper, styled, Typography} from "@mui/material";
 import SavingsIcon from "@mui/icons-material/Savings";
-import { useQuery } from "@tanstack/react-query";
+import {useMutation, useQuery, useQueryClient,} from "@tanstack/react-query";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import LinearProgress, {linearProgressClasses} from "@mui/material/LinearProgress";
 import {fetchSavings} from "../api/get.js";
+import CloseIcon from "@mui/icons-material/Close";
+import {deleteIncome, deleteSaving} from "../api/delete.js";
 
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
@@ -20,6 +22,8 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 
 
 export default function SavingList({onPutMoney}) {
+    const queryClient = useQueryClient();
+
     const { data: savings = [], isLoading, error } = // v5
         useQuery({
             queryKey: ['savings'],
@@ -27,6 +31,18 @@ export default function SavingList({onPutMoney}) {
             retry: 2,
             staleTime: 1000 * 60,
         });
+
+    const deleteMutation = useMutation({
+        mutationFn: deleteSaving,
+        onSuccess: () => {
+            // refetch or update cache after deletion
+            queryClient.invalidateQueries(["savings"]);
+        },
+        onError: (error) => {
+            console.error("Error deleting saving:", error);
+            alert("Failed to delete saving");
+        },
+    });
 
 
     if (isLoading) return <div>Loading savings...</div>;
@@ -51,22 +67,39 @@ export default function SavingList({onPutMoney}) {
                                     width:210,
                                     display: "flex",
                                     flexDirection: "column",
+                                    position: "relative",
                                     justifyContent: "space-between",
+                                    "&:hover .delete-btn": { opacity: 1 },
                                 }}
                             >
+                                <IconButton
+                                    className="delete-btn"
+                                    size="small"
+                                    sx={{
+                                        position: "absolute",
+                                        top: 8,
+                                        right: 8,
+                                        color: "red",
+                                        opacity: 0,
+                                        transition: "opacity 0.3s",
+                                    }}
+                                    onClick={() => deleteMutation.mutate(saving.id)}
+                                >
+                                    <CloseIcon fontSize="small" />
+                                </IconButton>
                                 <Typography variant="h6" fontWeight="bold">
-                                    {saving.category}
+                                    {saving.description}
                                 </Typography>
 
                                 <Box>
                                     <Typography variant="h5" fontWeight="bold">
-                                        €{saving.amount.toFixed(2)}
+                                        €{saving.amount}
                                     </Typography>
 
                                 </Box>
                                 <Box>
                                     <Typography variant="body2" color="text.secondary">
-                                        Saved: €{saving.amount.toFixed(2)} / €{saving.goalAmount.toFixed(2)}
+                                        Saved: €{saving.amount} / €{saving.goalAmount}
                                     </Typography>
                                     <BorderLinearProgress variant="determinate" value={spentPercent} sx={{ mt: 1 }} />
 

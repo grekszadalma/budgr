@@ -9,6 +9,7 @@ import com.budgr.demo.services.ExpenseService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/expenses")
@@ -49,5 +50,10 @@ public class ExpenseController {
     @GetMapping("/monthly/me/by-budget/{budgetName}")
     public List<Expense> getCurrentUserExpensesByBudget(@PathVariable String budgetName) {
         return expenseService.getExpensesForBudgetThisMonth(budgetName);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteExpense(@PathVariable UUID id) {
+        expenseService.removeExpense(id);
     }
 }

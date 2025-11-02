@@ -39,9 +39,9 @@ export default function Login() {
                 throw new Error("Login failed");
             }
 
-            const data = await response.text();
-            login(data);
-            console.log("User logged in:", data);
+
+            login();
+
             alert("Login successful!");
             navigate("/dashboard")
             // Optionally redirect to login
