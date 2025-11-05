@@ -1,0 +1,42 @@
+[
+{
+"id": 1,
+"category": "Rent/Mortgage",
+"description": "Monthly housing payments."
+},
+{
+"id": 2,
+"category": "Utilities",
+"description": "Electricity, water, gas, internet, etc."
+},
+{
+"id": 3,
+"category": "Groceries",
+"description": "Food and household essentials."
+},
+{
+"id": 4,
+"category": "Transportation",
+"description": "Fuel, public transit, car maintenance."
+},
+{
+"id": 5,
+"category": "Health & Medical",
+"description": "Insurance, medications, and doctor visits."
+},
+{
+"id": 6,
+"category": "Entertainment",
+"description": "Movies, streaming services, hobbies."
+},
+{
+"id": 7,
+"category": "Education",
+"description": "Courses, books, certifications."
+},
+{
+"id": 8,
+"category": "Shopping",
+"description": "Clothes, gadgets, personal items."
+}
+]

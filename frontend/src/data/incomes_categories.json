@@ -1,0 +1,69 @@
+[
+  {
+    "id": 1,
+    "category": "Salary",
+    "description": "Regular income from full-time or part-time employment"
+  },
+  {
+    "id": 2,
+    "category": "Freelance / Contract Work",
+    "description": "Payments received from freelance projects or short-term contracts"
+  },
+  {
+    "id": 3,
+    "category": "Business Income",
+    "description": "Earnings from your own business, side hustle, or self-employment"
+  },
+  {
+    "id": 4,
+    "category": "Investments",
+    "description": "Income from stocks, dividends, bonds, or mutual funds"
+  },
+  {
+    "id": 5,
+    "category": "Rental Income",
+    "description": "Earnings from renting out property or equipment"
+  },
+  {
+    "id": 6,
+    "category": "Interest",
+    "description": "Interest earned from savings accounts or deposits"
+  },
+  {
+    "id": 7,
+    "category": "Gifts",
+    "description": "Money received as gifts from friends or family"
+  },
+  {
+    "id": 8,
+    "category": "Bonuses",
+    "description": "Performance or holiday bonuses received from work"
+  },
+  {
+    "id": 9,
+    "category": "Tax Refunds",
+    "description": "Refunds or credits received from tax returns"
+  },
+  {
+    "id": 10,
+    "category": "Scholarships / Grants",
+    "description": "Educational or research funding received as income"
+  },
+  {
+    "id": 11,
+    "category": "Pension / Retirement",
+    "description": "Income received from pension plans or retirement funds"
+  },
+  {
+    "id": 12,
+    "category": "Unemployment benefit",
+    "description": "Money coming from the state for unemployment"
+
+  },
+  {
+    "id": 13,
+    "category": "Other",
+    "description": "Any other income not covered above"
+  }
+
+]

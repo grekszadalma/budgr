@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "category": "Groceries",
+    "description": "Monthly groceries budget."
+  },
+  {
+    "id": 2,
+    "category": "Health & Fitness",
+    "description": "Gym etc."
+  },
+  {
+    "id": 3,
+    "category": "Pets",
+    "description": "Pets."
+  },
+  {
+    "id": 4,
+    "category": "Transportation",
+    "description": "Fuel, public transit, car maintenance."
+  },
+  {
+    "id": 5,
+    "category": "Eating out",
+    "description": "Restaurant etc."
+  },
+  {
+    "id": 6,
+    "category": "Entertainment",
+    "description": "Movies, streaming services, hobbies."
+  }
+]

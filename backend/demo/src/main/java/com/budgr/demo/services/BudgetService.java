@@ -1,0 +1,89 @@
+package com.budgr.demo.services;
+
+import com.budgr.demo.dto.BudgetWithSpent;
+import com.budgr.demo.models.Budget;
+import com.budgr.demo.models.Expense;
+import com.budgr.demo.models.User;
+import com.budgr.demo.repositories.BudgetRepository;
+import com.budgr.demo.repositories.ExpenseRepository;
+import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.time.YearMonth;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+@Service
+public class BudgetService {
+
+    private BudgetRepository budgetRepository;
+    private ExpenseRepository expenseRepository;
+    private CurrentUserService currentUserService;
+
+
+    @Autowired
+    public BudgetService(BudgetRepository budgetRepository, ExpenseRepository expenseRepository, CurrentUserService currentUserService) {
+        this.budgetRepository = budgetRepository;
+        this.expenseRepository = expenseRepository;
+        this.currentUserService = currentUserService;
+    }
+
+    public List<Budget> getBudgetsByUser(User user) {
+        return budgetRepository.findByUser(user);
+    }
+
+    public Budget createBudget(Budget budget) {
+
+        budget.setCreationDate(LocalDateTime.now());
+
+        return budgetRepository.save(budget);
+    }
+
+    public List<BudgetWithSpent> getBudgetsWithSpentForUser(User user) {
+
+        List<Budget> budgets = budgetRepository.findByUser(user);
+
+        if(budgets.isEmpty()) {
+            return List.of();
+        }
+
+
+        LocalDateTime start = YearMonth.now().atDay(1).atStartOfDay();
+        LocalDateTime end = YearMonth.now().atEndOfMonth().atTime(23, 59, 59);
+
+
+
+        return budgets.stream().map(budget -> {
+            List<Expense> expenses = expenseRepository
+                    .findMonthlyExpensesByUserAndBudget(user.getId(), budgets.getFirst().getName(), start, end);
+            if (expenses == null) {
+                expenses = List.of();
+            }
+
+
+            double spent = expenses
+                    .stream()
+                    .mapToDouble(Expense::getAmount)
+                    .sum();
+
+
+            return new BudgetWithSpent(
+                    budget.getId(),
+                    budget.getName(),
+                    budget.getAmount(),
+                    spent
+            );
+        }).toList();
+    }
+
+    @Transactional
+    public void removeBudget(UUID id) {
+        User user = currentUserService.get();
+        budgetRepository.deleteBudgetByUserIdAndId(user.getId(),id);
+    }
+
+
+}
