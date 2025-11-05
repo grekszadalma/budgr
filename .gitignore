@@ -41,3 +41,4 @@ webscraper/__pycache__/
 backend-java/target/
 backend-java/.mvn/
 
+frontend/.vite/
