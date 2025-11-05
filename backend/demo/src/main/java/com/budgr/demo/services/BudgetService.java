@@ -43,25 +43,32 @@ public class BudgetService {
     }
 
     public List<BudgetWithSpent> getBudgetsWithSpentForUser(User user) {
-        // Fetch all budgets for the user
+
         List<Budget> budgets = budgetRepository.findByUser(user);
+
+        if(budgets.isEmpty()) {
+            return List.of();
+        }
 
 
         LocalDateTime start = YearMonth.now().atDay(1).atStartOfDay();
         LocalDateTime end = YearMonth.now().atEndOfMonth().atTime(23, 59, 59);
 
-        List<Expense> expenses = expenseRepository
-                .findMonthlyExpensesByUserAndBudget(user.getId(), budgets.getFirst().getName(), start, end);
-        System.out.println(expenses.size());
-         // Map budgets to BudgetWithSpent DTOs
-        return budgets.stream().map(budget -> {
 
-            double spent = expenseRepository
-                    .findMonthlyExpensesByUserAndBudget(user.getId(), budget.getName(), start, end)
+
+        return budgets.stream().map(budget -> {
+            List<Expense> expenses = expenseRepository
+                    .findMonthlyExpensesByUserAndBudget(user.getId(), budgets.getFirst().getName(), start, end);
+            if (expenses == null) {
+                expenses = List.of();
+            }
+
+
+            double spent = expenses
                     .stream()
                     .mapToDouble(Expense::getAmount)
                     .sum();
-            System.out.println(spent);
+
 
             return new BudgetWithSpent(
                     budget.getId(),

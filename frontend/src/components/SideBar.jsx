@@ -9,10 +9,13 @@ import SavingsOutlinedIcon from '@mui/icons-material/SavingsOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import WalletOutlinedIcon from '@mui/icons-material/WalletOutlined';
 import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import { Box, Typography, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
+import { useAuth } from "../AuthContext.jsx";
 
 export default function SideBar() {
 
+    const {logout} = useAuth()
     const navigate = useNavigate();
 
     return (
@@ -76,6 +79,12 @@ export default function SideBar() {
                         <FavoriteBorderOutlinedIcon />
                     </ListItemIcon>
                     <ListItemText primary="Wishlist" />
+                </ListItem>
+                <ListItem button sx={{width: 230}} onClick={() => logout()}>
+                    <ListItemIcon>
+                        <LogoutOutlinedIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Log out" />
                 </ListItem>
             </List>
         </Drawer>

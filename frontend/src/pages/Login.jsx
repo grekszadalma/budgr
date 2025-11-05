@@ -28,7 +28,7 @@ export default function Login() {
         e.preventDefault();
 
         try {
-            const response = await fetch("http://localhost:8080/authenticate", {
+            const response = await fetch("http://localhost:8080/api/authenticate", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 credentials: "include",
@@ -40,9 +40,8 @@ export default function Login() {
             }
 
 
-            login();
+            await login();
 
-            alert("Login successful!");
             navigate("/dashboard")
             // Optionally redirect to login
         } catch (error) {
@@ -76,7 +75,7 @@ export default function Login() {
                 onChange={handleChange}
             />
             <p>
-                Don't have an account? <Link to="/register">Register here</Link>
+                Don't have an account? <Link onClick={() => navigate("/register")}>Register here</Link>
             </p>
             <Button type="submit" variant="contained" onClick={handleSubmit}>Submit</Button>
         </Stack>

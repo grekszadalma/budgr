@@ -15,8 +15,8 @@ async function fetchBudgets() {
         credentials: "include"
     });
     if (!res.ok) throw new Error('Failed to fetch budgets');
-    const data = await res.json();   // parse JSON once
-    console.log(data);               // now this logs the actual array
+    const data = await res.json();
+    console.log(data);
     return data;
 }
 
@@ -47,7 +47,6 @@ export default function BudgetList() {
     const deleteMutation = useMutation({
         mutationFn: deleteBudget,
         onSuccess: () => {
-            // refetch or update cache after deletion
             queryClient.invalidateQueries(["budgets"]);
         },
         onError: (error) => {

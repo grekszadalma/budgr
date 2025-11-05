@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
 public class AuthenticationController {
 
     private final AuthenticationManager authenticationManager;
@@ -28,7 +29,7 @@ public class AuthenticationController {
 
 
 
-    @PostMapping("/authenticate")
+    @PostMapping("/api/authenticate")
     public String authenticate(@RequestBody AuthRequest request, HttpServletResponse response) throws Exception {
         try {
             authenticationManager.authenticate(
@@ -47,13 +48,27 @@ public class AuthenticationController {
         cookie.setSecure(false);
         cookie.setPath("/");
         cookie.setMaxAge(10 * 60 * 60);
-        cookie.setDomain("localhost");
-        cookie.setAttribute("SameSite", "None");
+        //cookie.setDomain("localhost");
+        cookie.setAttribute("SameSite", "Lax");
         response.addCookie(cookie);
 
 
         return "Login successful";
     }
+
+    @PostMapping("/api/logout")
+    public String logout(HttpServletResponse response) {
+        Cookie cookie = new Cookie("jwt", null);
+        cookie.setHttpOnly(true);
+        cookie.setSecure(false);
+        cookie.setPath("/");
+        cookie.setMaxAge(0);
+        cookie.setAttribute("SameSite", "Lax");
+        response.addCookie(cookie);
+
+        return "User logout successful";
+    }
+
 
     static class AuthRequest {
         private String email;
