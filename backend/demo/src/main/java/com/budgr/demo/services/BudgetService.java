@@ -58,7 +58,8 @@ public class BudgetService {
 
         return budgets.stream().map(budget -> {
             List<Expense> expenses = expenseRepository
-                    .findMonthlyExpensesByUserAndBudget(user.getId(), budgets.getFirst().getName(), start, end);
+                    .findMonthlyExpensesByUserAndBudget(user.getId(), budget.getName(), start, end);
+
             if (expenses == null) {
                 expenses = List.of();
             }
