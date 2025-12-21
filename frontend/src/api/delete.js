@@ -1,6 +1,8 @@
+const API_URL = import.meta.env.VITE_API_URL;
+
 
 export async function deleteExpense(id) {
-    const res = await fetch(`http://localhost:8080/api/expenses/${id}`, {
+    const res = await fetch(`${API_URL}:${API_SERVICE_PORT}/api/expenses/${id}`, {
         method: "DELETE",
         credentials: "include", // keep if using cookies/session auth
     });
@@ -14,7 +16,7 @@ export async function deleteExpense(id) {
 }
 
 export async function deleteIncome(id) {
-    const res = await fetch(`http://localhost:8080/api/incomes/${id}`, {
+    const res = await fetch(`${API_URL}:${API_SERVICE_PORT}/api/incomes/${id}`, {
         method: "DELETE",
         credentials: "include", // keep if using cookies/session auth
     });
@@ -28,7 +30,7 @@ export async function deleteIncome(id) {
 }
 
 export async function deleteBudget(id) {
-    const res = await fetch(`http://localhost:8080/api/budgets/${id}`, {
+    const res = await fetch(`${API_URL}:${API_SERVICE_PORT}/api/budgets/${id}`, {
         method: "DELETE",
         credentials: "include", // keep if using cookies/session auth
     });
@@ -42,7 +44,7 @@ export async function deleteBudget(id) {
 }
 
 export async function deleteSaving(id) {
-    const res = await fetch(`http://localhost:8080/api/savings/${id}`, {
+    const res = await fetch(`${API_URL}:${API_SERVICE_PORT}/api/savings/${id}`, {
         method: "DELETE",
         credentials: "include", // keep if using cookies/session auth
     });
@@ -56,7 +58,7 @@ export async function deleteSaving(id) {
 }
 
 export async function deleteWishlistItem(id) {
-    const res = await fetch(`http://localhost:8080/api/wlitems/${id}`, {
+    const res = await fetch(`${API_URL}:${API_SERVICE_PORT}/api/wlitems/${id}`, {
         method: "DELETE",
         credentials: "include", // keep if using cookies/session auth
     });

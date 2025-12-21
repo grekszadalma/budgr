@@ -2,6 +2,7 @@ import {Stack, TextField, Button, Typography, Box} from "@mui/material";
 import {useState} from "react";
 import * as React from "react";
 import SavingsIcon from '@mui/icons-material/Savings';
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function Register() {
 
@@ -23,7 +24,7 @@ export default function Register() {
         e.preventDefault();
 
         try {
-            const response = await fetch("http://localhost:8080/api/users/create", {
+            const response = await fetch(`${API_URL}/api/users/create`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData)

@@ -1,7 +1,7 @@
-
+const API_URL = import.meta.env.VITE_API_URL;
 
 export async function fetchIncomes() {
-    const res = await fetch('http://localhost:8080/api/incomes/me', {
+    const res = await fetch(`${API_URL}:${API_SERVICE_PORT}/api/incomes/me`, {
         method: "GET",
         credentials: "include"
     });
@@ -12,7 +12,7 @@ export async function fetchIncomes() {
 }
 
 export async function fetchMonthlyIncomes() {
-    const res = await fetch("http://localhost:8080/api/incomes/monthly/me", {
+    const res = await fetch(`${API_URL}:${API_SERVICE_PORT}/api/incomes/monthly/me`, {
         method: "GET",
         credentials: "include",
     });
@@ -21,7 +21,7 @@ export async function fetchMonthlyIncomes() {
 }
 
 export async function fetchExpenses() {
-    const res = await fetch('http://localhost:8080/api/expenses/me', {
+    const res = await fetch(`${API_URL}:${API_SERVICE_PORT}/api/expenses/me`, {
         method: "GET",
         credentials: "include"
     });
@@ -32,7 +32,7 @@ export async function fetchExpenses() {
 }
 
 export async function fetchMonthlyExpenses() {
-    const res = await fetch('http://localhost:8080/api/expenses/monthly/me', {
+    const res = await fetch(`${API_URL}:${API_SERVICE_PORT}/api/expenses/monthly/me`, {
         method: "GET",
         credentials: "include"
     });
@@ -46,7 +46,7 @@ export async function fetchMonthlyExpenses() {
 }
 
 export async function fetchSavings() {
-    const res = await fetch('http://localhost:8080/api/savings/me', {
+    const res = await fetch(`${API_URL}:${API_SERVICE_PORT}/api/savings/me`, {
         method: "GET",
         credentials: "include"
     });
@@ -57,7 +57,7 @@ export async function fetchSavings() {
 }
 
 export async function fetchMonthlySavings() {
-    const res = await fetch('http://localhost:8080/api/savings/monthly/me', {
+    const res = await fetch(`${API_URL}:${API_SERVICE_PORT}/api/savings/monthly/me`, {
         method: "GET",
         credentials: "include"
     });

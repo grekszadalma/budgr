@@ -2,6 +2,8 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext();
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true); // Add loading state
@@ -10,7 +12,7 @@ export function AuthProvider({ children }) {
     const fetchUser = async () => {
         try {
             console.log("Fetching user")
-            const res = await fetch("http://localhost:8080/api/users/me", {
+            const res = await fetch(`${API_URL}/api/users/me`, {
                 credentials: "include",
             });
 
@@ -40,7 +42,7 @@ export function AuthProvider({ children }) {
 
     const logout = async () => {
         // optional: tell backend to clear cookie
-        await fetch("http://localhost:8080/api/logout", {
+        await fetch(`${API_URL}/api/logout`, {
             method: "POST",
             credentials: "include",
         });

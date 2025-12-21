@@ -5,6 +5,8 @@ import SavingsIcon from '@mui/icons-material/Savings';
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthContext.jsx";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function Login() {
 
     const { login } = useAuth();
@@ -28,7 +30,7 @@ export default function Login() {
         e.preventDefault();
 
         try {
-            const response = await fetch("http://localhost:8080/api/authenticate", {
+            const response = await fetch(`${API_URL}/api/authenticate`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 credentials: "include",
