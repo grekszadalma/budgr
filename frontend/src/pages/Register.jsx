@@ -2,8 +2,16 @@ import {Stack, TextField, Button, Typography, Box} from "@mui/material";
 import {useState} from "react";
 import * as React from "react";
 import SavingsIcon from '@mui/icons-material/Savings';
+<<<<<<< Updated upstream
+=======
+import { API_URL } from "../config/api";
+
+
+
+>>>>>>> Stashed changes
 
 export default function Register() {
+    console.log("API_URL =", API_URL);
 
     const [formData, setFormData] = useState({
         email: "",
@@ -44,12 +52,17 @@ export default function Register() {
     };
 
     return(
+
         <form onSubmit={handleRegister}>
             <Stack spacing={2}>
+
                 <Box display="flex" mb={2} justifyContent="center" alignItems="center" >
                     <SavingsIcon fontSize="large" sx = {{ mr: 1}} />
-                    <Typography variant="h6">Budgr</Typography>
+                    <Typography variant="h6" color="red">
+                        REGISTER MODIFIED 🚀
+                    </Typography>
                 </Box>
+
                 <TextField
                     required
                     label="Email"

@@ -5,10 +5,10 @@ import {useQuery} from "@tanstack/react-query";
 import { useDispatch } from 'react-redux';
 import { setSelectedItem, clearSelectedItem } from "../features/selectedItemSlice";
 import { useNavigate } from 'react-router-dom';
-
+import { API_URL } from "../config/api";
 
 async function fetchWishlist() {
-    const res = await fetch('http://localhost:8080/api/wlitems/me', {
+    const res = await fetch(`${API_URL}/api/wlitems/me`, {
         method: "GET",
         credentials: "include"
     });

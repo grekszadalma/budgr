@@ -7,6 +7,8 @@ import savingsData from "../data/savings_categories.json";
 import WishlistList from "../components/WishlistList.jsx";
 import budgetData from "../data/budget_categories.json";
 
+import { API_URL } from "../config/api";
+
 export default function Budget() {
     const [open, setOpen] = useState(false);
 
@@ -17,7 +19,7 @@ export default function Budget() {
         console.log("Form submitted!", formData);
 
         try {
-            const response = await fetch("http://localhost:8080/api/budgets/me", {
+            const response = await fetch(`${API_URL}/api/budgets/me`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

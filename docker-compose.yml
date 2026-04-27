@@ -4,6 +4,7 @@ services:
   frontend:
     build:
       context: ./frontend
+<<<<<<< Updated upstream
       dockerfile: Dockerfile
     ports:
       - "5173:5173"
@@ -13,6 +14,10 @@ services:
     environment:
       - CHOKIDAR_USEPOLLING=true
     command: ["npm", "run", "dev", "--", "--host"]
+=======
+    ports:
+      - "80:80"
+>>>>>>> Stashed changes
 
   backend:
     build:

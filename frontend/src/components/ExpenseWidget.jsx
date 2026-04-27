@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { Box, Paper, Typography, LinearProgress, styled } from "@mui/material";
 import { linearProgressClasses } from "@mui/material/LinearProgress";
-
+import { API_URL } from "../config/api";
 
 async function fetchMonthlyExpenses() {
-    const res = await fetch("http://localhost:8080/api/expenses/monthly/me", {
+    const res = await fetch(`${API_URL}/api/expenses/monthly/me`, {
         method: "GET",
         credentials: "include",
     });

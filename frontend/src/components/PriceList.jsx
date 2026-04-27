@@ -1,7 +1,7 @@
 import { Box, Card } from "@mui/material";
 import SavingsIcon from "@mui/icons-material/Savings";
 import { useQuery } from "@tanstack/react-query";
-
+import { API_URL } from "../config/api";
 
 
 export default function PriceList({item, category}) {
@@ -10,7 +10,7 @@ export default function PriceList({item, category}) {
     // Dynamic fetch function
     const fetchPrices = async () => {
         if (!item) return [];
-        const url = `http://localhost:8080/api/wishlist/items/prices?itemName=${encodeURIComponent(item)}&category=${encodeURIComponent(category)}`;
+        const url = `${API_URL}/api/wishlist/items/prices?itemName=${encodeURIComponent(item)}&category=${encodeURIComponent(category)}`;
         const res = await fetch(url, {
             credentials: "include" // if your backend requires cookies/auth
         });

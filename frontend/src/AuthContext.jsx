@@ -1,7 +1,13 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { API_URL } from "./config/api";
 
 const AuthContext = createContext();
 
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
 export function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true); // Add loading state

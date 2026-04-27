@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 
+=======
+import { API_URL } from "../config/api";
+>>>>>>> Stashed changes
 
 export async function fetchIncomes() {
     const res = await fetch('http://localhost:8080/api/incomes/me', {

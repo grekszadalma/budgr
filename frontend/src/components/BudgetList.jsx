@@ -9,8 +9,10 @@ import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgr
 import CloseIcon from "@mui/icons-material/Close";
 import {deleteBudget} from "../api/delete.js";
 
+import { API_URL } from "../config/api";
+
 async function fetchBudgets() {
-    const res = await fetch('http://localhost:8080/api/budgets/me/with-spent', {
+    const res = await fetch(`${API_URL}/api/budgets/me/with-spent`, {
         method: "GET",
         credentials: "include"
     });

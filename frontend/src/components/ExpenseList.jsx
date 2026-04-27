@@ -4,7 +4,7 @@ import { useQuery, useMutation,useQueryClient } from "@tanstack/react-query";
 import {fetchMonthlyExpenses} from "../api/get.js";
 import {deleteExpense} from "../api/delete.js";
 import CloseIcon from "@mui/icons-material/Close";
-
+import { API_URL } from "../config/api";
 
 
 export default function ExpenseList() {

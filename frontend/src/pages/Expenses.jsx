@@ -5,9 +5,10 @@ import {Box, Button, Divider, Typography} from "@mui/material";
 import AddModal from "../components/AddModal.jsx";
 import budgetData from "../data/budget_categories.json";
 import {useQuery} from "@tanstack/react-query";
+import { API_URL } from "../config/api";
 
 async function fetchBudgets() {
-    const res = await fetch('http://localhost:8080/api/budgets/me', {
+    const res = await fetch(`${API_URL}/api/budgets/me`, {
         method: "GET",
         credentials: "include"
     });
@@ -34,7 +35,7 @@ export default function Expenses() {
         console.log("Form submitted!", formData);
 
         try {
-            const response = await fetch("http://localhost:8080/api/expenses/me", {
+            const response = await fetch(`${API_URL}/api/expenses/me`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

@@ -2,8 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import { Box, Paper, Typography, LinearProgress, styled } from "@mui/material";
 import { linearProgressClasses } from "@mui/material/LinearProgress";
 
+import { API_URL } from "../config/api";
+
 async function fetchBudgets() {
-    const res = await fetch("http://localhost:8080/api/budgets/me/with-spent", {
+    const res = await fetch(`${API_URL}/api/budgets/me/with-spent`, {
         method: "GET",
         credentials: "include",
     });
