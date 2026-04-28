@@ -2,13 +2,9 @@ import {Stack, TextField, Button, Typography, Box} from "@mui/material";
 import {useState} from "react";
 import * as React from "react";
 import SavingsIcon from '@mui/icons-material/Savings';
-<<<<<<< Updated upstream
-=======
+
 import { API_URL } from "../config/api";
 
-
-
->>>>>>> Stashed changes
 
 export default function Register() {
     console.log("API_URL =", API_URL);

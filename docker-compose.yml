@@ -4,8 +4,6 @@ services:
   frontend:
     build:
       context: ./frontend
-<<<<<<< Updated upstream
-      dockerfile: Dockerfile
     ports:
       - "5173:5173"
     volumes:
@@ -14,28 +12,25 @@ services:
     environment:
       - CHOKIDAR_USEPOLLING=true
     command: ["npm", "run", "dev", "--", "--host"]
-=======
-    ports:
-      - "80:80"
->>>>>>> Stashed changes
 
   backend:
     build:
       context: ./backend
-      dockerfile: Dockerfile
     ports:
       - "8080:8080"
     depends_on:
       - db
+      - python-service
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/mydb
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: postgres
+      SCRAPER_SERVICE_HOST: python-service
+      SCRAPER_SERVICE_PORT: 5000
 
   python-service:
     build:
       context: ./price_checker
-      dockerfile: Dockerfile
     ports:
       - "5000:5000"
 
@@ -49,7 +44,6 @@ services:
       - "5432:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
-
 
 volumes:
   db_data:

@@ -4,10 +4,9 @@ import * as React from "react";
 import SavingsIcon from '@mui/icons-material/Savings';
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthContext.jsx";
-<<<<<<< Updated upstream
-=======
+
 import { API_URL } from "../config/api";
->>>>>>> Stashed changes
+
 
 export default function Login() {
 

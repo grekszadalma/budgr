@@ -1,8 +1,7 @@
-<<<<<<< Updated upstream
-=======
+
 import { API_URL } from "../config/api";
 
->>>>>>> Stashed changes
+
 
 export async function deleteExpense(id) {
     const res = await fetch(`http://localhost:8080/api/expenses/${id}`, {
