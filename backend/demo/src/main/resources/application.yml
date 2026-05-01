@@ -1,9 +1,9 @@
 spring:
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/budget_management
-    username: budget_user
-    password: password
+    url: jdbc:postgresql://terraform-20260501105648755100000001.ch2402mwo8yt.eu-west-3.rds.amazonaws.com:5432/budget_management
+    username: postgres
+    password: postgres123
     driver-class-name: org.postgresql.Driver
 
   jpa:
