@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "frontend" {
-  bucket        = "my-app-frontend-unique-12345"
+  bucket        = "budgr-site-frontend"
   force_destroy = true
 }
 
