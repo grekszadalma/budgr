@@ -1,7 +1,7 @@
 spring:
 
   datasource:
-    url: jdbc:postgresql://terraform-20260501145042006400000001.ch2402mwo8yt.eu-west-3.rds.amazonaws.com:5432/budget_management
+    url: jdbc:postgresql://terraform-20260501172556905200000004.ch2402mwo8yt.eu-west-3.rds.amazonaws.com:5432/budget_management
     username: postgres
     password: postgres123
     driver-class-name: org.postgresql.Driver
