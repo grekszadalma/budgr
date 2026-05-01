@@ -17,7 +17,8 @@ import java.util.UUID;
 @RequestMapping("/api/incomes")
 @CrossOrigin(origins = {
         "http://localhost:5173",
-        "https://d3ff8ih0471bsz.cloudfront.net"
+        "https://budgr.site",
+        "https://www.budgr.site"
 }, allowCredentials = "true")
 public class IncomeController {
 
