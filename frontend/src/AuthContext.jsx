@@ -12,7 +12,7 @@ export function AuthProvider({ children }) {
     const fetchUser = async () => {
         try {
             console.log("Fetching user")
-            const res = await fetch("http://localhost:8080/api/users/me", {
+            const res = await fetch(`${API_URL}/api/users/me`, {
                 credentials: "include",
             });
 
