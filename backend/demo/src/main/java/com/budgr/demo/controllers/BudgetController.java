@@ -13,7 +13,10 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/budgets")
-@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+@CrossOrigin(origins = {
+        "http://localhost:5173",
+        "https://d3ff8ih0471bsz.cloudfront.net"
+}, allowCredentials = "true")
 public class BudgetController {
 
     private BudgetService  budgetService;

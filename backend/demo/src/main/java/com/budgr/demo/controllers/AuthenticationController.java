@@ -12,7 +12,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+@CrossOrigin(origins = {
+        "http://localhost:5173",
+        "https://d3ff8ih0471bsz.cloudfront.net"
+}, allowCredentials = "true")
 public class AuthenticationController {
 
     private final AuthenticationManager authenticationManager;

@@ -10,7 +10,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/wishlist/items")
-@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+@CrossOrigin(origins = {
+        "http://localhost:5173",
+        "https://d3ff8ih0471bsz.cloudfront.net"
+}, allowCredentials = "true")
 public class SourceItemController {
 
     private SourceItemService sourceItemService;

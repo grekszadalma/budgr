@@ -27,7 +27,7 @@ export default function Register() {
         e.preventDefault();
 
         try {
-            const response = await fetch("http://localhost:8080/api/users/create", {
+            const response = await fetch(`${API_URL}/api/users/create`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData)
