@@ -55,7 +55,7 @@ export default function Register() {
                 <Box display="flex" mb={2} justifyContent="center" alignItems="center" >
                     <SavingsIcon fontSize="large" sx = {{ mr: 1}} />
                     <Typography variant="h6" color="red">
-                        REGISTER MODIFIED 🚀
+                        REGISTER
                     </Typography>
                 </Box>
 
