@@ -1,1 +1,1 @@
-export const API_URL = "https://api.budgr.site";
+export const API_URL = "http://localhost:8080";
