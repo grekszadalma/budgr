@@ -16,7 +16,7 @@ export default function Budget() {
     const handleClose = () => setOpen(false);
 
     const handleSubmit = async (formData) => {
-        console.log("Form submitted!", formData);
+        
 
         try {
             const response = await fetch(`${API_URL}/api/budgets/me`, {
@@ -33,7 +33,7 @@ export default function Budget() {
             }
 
             const data = await response.json();
-            console.log("Expense created:", data);
+            
 
             // Optionally, refresh the expense list or update state here
 

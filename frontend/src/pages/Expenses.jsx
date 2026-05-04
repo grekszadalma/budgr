@@ -14,7 +14,7 @@ async function fetchBudgets() {
     });
     if (!res.ok) throw new Error('Failed to fetch budgets');
     const data = await res.json();   // parse JSON once
-    console.log(data);               // now this logs the actual array
+                   // now this logs the actual array
     return data;
 }
 
@@ -32,7 +32,7 @@ export default function Expenses() {
             staleTime: 1000 * 60,
         });
     const handleSubmit = async (formData) => {
-        console.log("Form submitted!", formData);
+        
 
         try {
             const response = await fetch(`${API_URL}/api/expenses/me`, {
@@ -49,7 +49,7 @@ export default function Expenses() {
             }
 
             const data = await response.json();
-            console.log("Expense created:", data);
+            
 
             // Optionally, refresh the expense list or update state here
 

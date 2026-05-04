@@ -9,7 +9,7 @@ export async function fetchIncomes() {
     });
     if (!res.ok) throw new Error('Failed to fetch incomes');
     const data = await res.json();   // parse JSON once
-    console.log(data);               // now this logs the actual array
+                   // now this logs the actual array
     return data;
 }
 
@@ -29,7 +29,7 @@ export async function fetchExpenses() {
     });
     if (!res.ok) throw new Error('Failed to fetch expenses');
     const data = await res.json();   // parse JSON once
-    console.log(data);               // now this logs the actual array
+                   // now this logs the actual array
     return data;
 }
 
@@ -43,7 +43,7 @@ export async function fetchMonthlyExpenses() {
 
 
 
-    console.log(data);
+    
     return data;
 }
 
@@ -54,7 +54,7 @@ export async function fetchSavings() {
     });
     if (!res.ok) throw new Error('Failed to fetch expenses');
     const data = await res.json();
-    console.log(data);
+    
     return data;
 }
 
@@ -65,6 +65,6 @@ export async function fetchMonthlySavings() {
     });
     if (!res.ok) throw new Error('Failed to fetch expenses');
     const data = await res.json();
-    console.log(data);
+    
     return data;
 }

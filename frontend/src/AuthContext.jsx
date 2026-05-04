@@ -21,7 +21,7 @@ export function AuthProvider({ children }) {
                 setUser(null);
             } else {
                 const data = await res.json();
-                console.log("Fetched user:", data);
+                
                 setUser(data);
             }
         } catch (err) {

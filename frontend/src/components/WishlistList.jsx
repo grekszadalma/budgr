@@ -14,7 +14,7 @@ async function fetchWishlist() {
     });
     if (!res.ok) throw new Error('Failed to fetch wl items');
     const data = await res.json();   // parse JSON once
-    console.log(data);               // now this logs the actual array
+                   // now this logs the actual array
     return data;
 }
 

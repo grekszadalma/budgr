@@ -13,7 +13,7 @@ export default function Incomes() {
     const handleClose = () => setOpen(false);
 
     const handleSubmit = async (formData) => {
-        console.log("Form submitted!", formData);
+
 
         try {
             const response = await fetch(`${API_URL}/api/incomes/me`, {
@@ -30,7 +30,7 @@ export default function Incomes() {
             }
 
             const data = await response.json();
-            console.log("Income created:", data);
+            
 
             // Optionally, refresh the expense list or update state here
 

@@ -7,7 +7,7 @@ import { API_URL } from "../config/api";
 
 
 export default function Register() {
-    console.log("API_URL =", API_URL);
+    
 
     const [formData, setFormData] = useState({
         email: "",
@@ -38,7 +38,7 @@ export default function Register() {
             }
 
             const data = await response.json();
-            console.log("User registered:", data);
+            
             alert("Registration successful!");
             // Optionally redirect to login
         } catch (error) {

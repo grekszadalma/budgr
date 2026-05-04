@@ -14,7 +14,7 @@ export default function Savings() {
     const handleClose = () => setOpen(false);
 
     const handleSubmit = async (formData) => {
-        console.log("Form submitted!", formData);
+        
 
         try {
             const response = await fetch(`${API_URL}/api/savings/me`, {
@@ -31,7 +31,7 @@ export default function Savings() {
             }
 
             const data = await response.json();
-            console.log("Expense created:", data);
+            
 
             // Optionally, refresh the expense list or update state here
 
@@ -68,7 +68,7 @@ export default function Savings() {
             if (!response.ok) throw new Error("Failed to update saving");
 
             const data = await response.json();
-            console.log("Saving updated:", data);
+            
 
             // Optionally refresh your savings list here
             handlePutMoneyClose();

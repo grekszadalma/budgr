@@ -25,8 +25,8 @@ fi
 cd app
 
 # Checkout correct branch
-git checkout dev/v1.0.0
-git pull origin dev/v1.0.0
+git checkout release/v1.0.0
+git pull origin release/v1.0.0
 
 # Run containers
 docker-compose down || true

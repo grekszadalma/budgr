@@ -14,7 +14,7 @@ export default function Wishlist() {
     const handleClose = () => setOpen(false);
 
     const handleSubmit = async (formData) => {
-        console.log("Form submitted!", formData);
+        
         try {
             const response = await fetch(`${API_URL}/api/wlitems/me`, {
                 method: "POST",
@@ -24,7 +24,7 @@ export default function Wishlist() {
             });
             if (!response.ok) throw new Error("Failed to create wishlist item");
             const data = await response.json();
-            console.log("Wishlist item created:", data);
+            
             handleClose();
         } catch (error) {
             console.error("Error creating wishlist item:", error);
