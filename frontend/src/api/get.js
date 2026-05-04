@@ -59,7 +59,7 @@ export async function fetchSavings() {
 }
 
 export async function fetchMonthlySavings() {
-    const res = await fetch(`http://localhost:8080/api/savings/monthly/me`, {
+    const res = await fetch(`${API_URL}/api/savings/monthly/me`, {
         method: "GET",
         credentials: "include"
     });

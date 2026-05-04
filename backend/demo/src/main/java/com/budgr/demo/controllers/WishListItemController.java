@@ -43,6 +43,8 @@ public class WishListItemController {
         return wishListItemService.findAllWishListItems();
     }
 
+
+
     @PostMapping("/me")
     public WishListItem createCurrentUserWishListItem(@RequestBody WishListItem wishListItem) {
         User user = currentUserService.get();
