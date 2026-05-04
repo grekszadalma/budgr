@@ -3,7 +3,7 @@ name: Deploy React to S3
 on:
   push:
     branches:
-      - dev/v1.0.0
+      - release/v1.0.0
   workflow_dispatch:
 
 jobs:
