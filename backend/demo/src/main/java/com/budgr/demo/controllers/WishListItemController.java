@@ -12,7 +12,11 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("api/wlitems")
-@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+@CrossOrigin(origins = {
+        "http://localhost:5173",
+        "https://budgr.site",
+        "https://www.budgr.site"
+}, allowCredentials = "true")
 public class WishListItemController {
 
     private WishListItemService wishListItemService;

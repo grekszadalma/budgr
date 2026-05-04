@@ -1,15 +1,17 @@
-
-FROM node:20-alpine
+# Build
+FROM node:20-alpine AS build
 WORKDIR /app
 
 COPY package*.json ./
 RUN npm install
-RUN npm install @mui/icons-material @mui/material @emotion/styled @emotion/react
-RUN npm install react-router-dom
-RUN npm install @tanstack/react-query
-
 
 COPY . .
-CMD npm run dev -- --host 0.0.0.0
+RUN npm run build
 
+# Serve with Nginx
+FROM nginx:alpine
 
+COPY --from=build /app/dist /usr/share/nginx/html
+
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

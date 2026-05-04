@@ -41,3 +41,14 @@ webscraper/__pycache__/
 backend-java/target/
 backend-java/.mvn/
 
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+
+# Node
+node_modules/
+
+# Env
+.env

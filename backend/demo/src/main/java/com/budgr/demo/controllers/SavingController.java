@@ -15,7 +15,11 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/savings")
-@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+@CrossOrigin(origins = {
+        "http://localhost:5173",
+        "https://budgr.site",
+        "https://www.budgr.site"
+}, allowCredentials = "true")
 public class SavingController {
 
     private SavingService savingService;

@@ -1,8 +1,8 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { API_URL } from "./config/api";
 
 const AuthContext = createContext();
 
-const API_URL = import.meta.env.VITE_API_URL;
 
 export function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
@@ -42,7 +42,7 @@ export function AuthProvider({ children }) {
 
     const logout = async () => {
         // optional: tell backend to clear cookie
-        await fetch(`${API_URL}/api/logout`, {
+        await fetch("http://localhost:8080/api/logout", {
             method: "POST",
             credentials: "include",
         });

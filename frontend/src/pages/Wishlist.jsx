@@ -4,6 +4,8 @@ import { Box, Button, Divider, Typography, Grid, Paper } from "@mui/material";
 import AddModal from "../components/AddModal.jsx";
 import wishlistData from "../data/wishlist_categories.json";
 import WishlistList from "../components/WishlistList.jsx";
+import { API_URL } from "../config/api";
+
 
 export default function Wishlist() {
     const [open, setOpen] = useState(false);
@@ -14,7 +16,7 @@ export default function Wishlist() {
     const handleSubmit = async (formData) => {
         console.log("Form submitted!", formData);
         try {
-            const response = await fetch("http://localhost:8080/api/wlitems/me", {
+            const response = await fetch(`${API_URL}/api/wlitems/me`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData),

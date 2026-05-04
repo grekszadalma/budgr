@@ -5,7 +5,8 @@ import SavingsIcon from '@mui/icons-material/Savings';
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthContext.jsx";
 
-const API_URL = import.meta.env.VITE_API_URL;
+import { API_URL } from "../config/api";
+
 
 export default function Login() {
 

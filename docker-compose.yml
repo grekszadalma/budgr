@@ -1,9 +1,22 @@
+version: "3.9"
+
 services:
   backend:
-    build: ./backend
-    container_name: budgr-backend
-    env_file:
-      - .env
+    build:
+      context: ./backend
     ports:
       - "8080:8080"
-    restart: unless-stopped
+    depends_on:
+      - python-service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://terraform-20260501172556905200000004.ch2402mwo8yt.eu-west-3.rds.amazonaws.com:5432/budget_management
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres123
+      SCRAPER_SERVICE_HOST: python-service
+      SCRAPER_SERVICE_PORT: 5000
+
+  python-service:
+    build:
+      context: ./price_checker
+    ports:
+      - "5000:5000"

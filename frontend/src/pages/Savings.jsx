@@ -5,6 +5,7 @@ import {Box, Button, Divider, Typography} from "@mui/material";
 import AddModal from "../components/AddModal.jsx";
 import savingsData from "../data/savings_categories.json";
 import AddMoneyModal from "../components/AddMoneyModal.jsx";
+import { API_URL } from "../config/api";
 
 export default function Savings() {
     const [open, setOpen] = useState(false);
@@ -16,7 +17,7 @@ export default function Savings() {
         console.log("Form submitted!", formData);
 
         try {
-            const response = await fetch("http://localhost:8080/api/savings/me", {
+            const response = await fetch(`${API_URL}/api/savings/me`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -57,7 +58,7 @@ export default function Savings() {
         if (!selectedSaving) return;
 
         try {
-            const response = await fetch(`http://localhost:8080/api/savings/${selectedSaving.id}`, {
+            const response = await fetch(`${API_URL}/api/savings/${selectedSaving.id}`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 credentials: "include",

@@ -4,6 +4,7 @@ import IncomeList from "../components/IncomeList.jsx";
 import {Box, Button, Divider, Typography} from "@mui/material";
 import AddModal from "../components/AddModal.jsx";
 import incomesData from "../data/incomes_categories.json";
+import { API_URL } from "../config/api";
 
 export default function Incomes() {
     const [open, setOpen] = useState(false);
@@ -15,7 +16,7 @@ export default function Incomes() {
         console.log("Form submitted!", formData);
 
         try {
-            const response = await fetch("http://localhost:8080/api/incomes/me", {
+            const response = await fetch(`${API_URL}/api/incomes/me`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

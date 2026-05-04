@@ -4,7 +4,11 @@ import * as React from "react";
 import SavingsIcon from '@mui/icons-material/Savings';
 const API_URL = import.meta.env.VITE_API_URL;
 
+import { API_URL } from "../config/api";
+
+
 export default function Register() {
+    console.log("API_URL =", API_URL);
 
     const [formData, setFormData] = useState({
         email: "",
@@ -45,12 +49,17 @@ export default function Register() {
     };
 
     return(
+
         <form onSubmit={handleRegister}>
             <Stack spacing={2}>
+
                 <Box display="flex" mb={2} justifyContent="center" alignItems="center" >
                     <SavingsIcon fontSize="large" sx = {{ mr: 1}} />
-                    <Typography variant="h6">Budgr</Typography>
+                    <Typography variant="h6" color="red">
+                        REGISTER
+                    </Typography>
                 </Box>
+
                 <TextField
                     required
                     label="Email"
