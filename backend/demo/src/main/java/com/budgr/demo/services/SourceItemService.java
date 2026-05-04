@@ -67,9 +67,10 @@ public class SourceItemService {
 
     private List<Map<String, String>> callPythonScraper(String productName, String category) {
         try {
-            String apiUrl = "http://localhost:5000/prices?name=" +
+            String apiUrl = "http://python-service:5000/prices?name=" +
                     URLEncoder.encode(productName, StandardCharsets.UTF_8) +
                     "&category=" + URLEncoder.encode(category, StandardCharsets.UTF_8);
+
             HttpURLConnection con = (HttpURLConnection) new URL(apiUrl).openConnection();
             con.setRequestMethod("GET");
             con.setConnectTimeout(10000);
@@ -79,7 +80,6 @@ public class SourceItemService {
                 StringBuilder response = new StringBuilder();
                 String line;
                 while ((line = in.readLine()) != null) response.append(line);
-                System.out.println("Python API response: " + response.toString());
 
                 ObjectMapper mapper = new ObjectMapper();
                 return mapper.readValue(response.toString(), new TypeReference<List<Map<String, String>>>() {});
